@@ -19,9 +19,9 @@ Everything south of this line is the ultimate goal. Not what's here now.
 
 Because this software package is so small, no installer is provided. Run:
 
-The .exe file if you're on Windows
-The .dmg file if you're on Mac
-The .deb file if you're on deb Linux
+- The `.exe` file if you're on Windows
+- The `.dmg` file if you're on Mac
+- The `.deb` file if you're on deb Linux
 
 ## To change scraping settings
 
