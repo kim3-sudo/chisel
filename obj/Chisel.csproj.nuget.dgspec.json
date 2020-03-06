@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\skim2\\source\\repos\\Chisel\\Chisel.csproj": {}
+    "C:\\Users\\skim2\\Documents\\chisel\\Chisel.csproj": {}
   },
   "projects": {
-    "C:\\Users\\skim2\\source\\repos\\Chisel\\Chisel.csproj": {
+    "C:\\Users\\skim2\\Documents\\chisel\\Chisel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\skim2\\source\\repos\\Chisel\\Chisel.csproj",
+        "projectUniqueName": "C:\\Users\\skim2\\Documents\\chisel\\Chisel.csproj",
         "projectName": "Chisel",
-        "projectPath": "C:\\Users\\skim2\\source\\repos\\Chisel\\Chisel.csproj",
+        "projectPath": "C:\\Users\\skim2\\Documents\\chisel\\Chisel.csproj",
         "packagesPath": "C:\\Users\\skim2\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\skim2\\source\\repos\\Chisel\\obj\\",
+        "outputPath": "C:\\Users\\skim2\\Documents\\chisel\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\skim2\\AppData\\Roaming\\NuGet\\NuGet.Config",

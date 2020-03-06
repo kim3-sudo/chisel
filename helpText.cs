@@ -22,7 +22,8 @@ public class helpText
         Console.WriteLine("CHISEL SOFTWARE PACKAGE");
         Console.WriteLine("\n");
         Console.WriteLine("To execute a page scrape, enter the root domain name of the athletics page");
-        Console.WriteLine("to be scraped. Do not include any prefixes. For example, instead of: ");
+        Console.WriteLine("to be scraped. Do not include any prefixes or suffixes. For example, instead");
+        Console.WriteLine(" of: ");
         Console.WriteLine("\t 'https://hopkinssports.com/sports/mens-lacrosse/coaches'");
         Console.WriteLine("You should use: ");
         Console.WriteLine("\t 'hopkinssports.com'");

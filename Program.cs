@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-
 namespace Chisel
 {
     class Program
@@ -11,12 +10,17 @@ namespace Chisel
             bool runtime = true;
             var t = new helpText();
             t.intro();
+
+            //this should bring in the prefix and suffix, as well as multfile
+            var u = new xmlparse();
+            u.settingsParser();
+            string prefix = u.Prefix();
+            string suffix = u.Suffix();
+
             while (runtime == true)
             {
                 Console.Write("--> ");
                 string address = Console.ReadLine();
-                string prefix = "https://";
-                string suffix = "";
 
                 //decision tree to figure out what do do with the address
                 if (address != "-HELP" && address != "-EXIT" && address != "")
@@ -38,7 +42,7 @@ namespace Chisel
 
 
 
-                        Console.WriteLine("SCRAPE IS WIP.")
+                        Console.WriteLine("SCRAPE IS WIP.");
                         //KEEP THIS IN so that the next query displays correctly...
                         Console.Write("\n");
                     }
