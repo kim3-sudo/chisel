@@ -1,0 +1,11 @@
+C:\Users\skim2\source\repos\Chisel\bin\Debug\netcoreapp3.1\Chisel.exe
+C:\Users\skim2\source\repos\Chisel\bin\Debug\netcoreapp3.1\Chisel.deps.json
+C:\Users\skim2\source\repos\Chisel\bin\Debug\netcoreapp3.1\Chisel.runtimeconfig.json
+C:\Users\skim2\source\repos\Chisel\bin\Debug\netcoreapp3.1\Chisel.runtimeconfig.dev.json
+C:\Users\skim2\source\repos\Chisel\bin\Debug\netcoreapp3.1\Chisel.dll
+C:\Users\skim2\source\repos\Chisel\bin\Debug\netcoreapp3.1\Chisel.pdb
+C:\Users\skim2\source\repos\Chisel\obj\Debug\netcoreapp3.1\Chisel.csprojAssemblyReference.cache
+C:\Users\skim2\source\repos\Chisel\obj\Debug\netcoreapp3.1\Chisel.AssemblyInfoInputs.cache
+C:\Users\skim2\source\repos\Chisel\obj\Debug\netcoreapp3.1\Chisel.AssemblyInfo.cs
+C:\Users\skim2\source\repos\Chisel\obj\Debug\netcoreapp3.1\Chisel.dll
+C:\Users\skim2\source\repos\Chisel\obj\Debug\netcoreapp3.1\Chisel.pdb
