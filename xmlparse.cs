@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace Chisel
 {
@@ -32,18 +34,24 @@ namespace Chisel
                 //does the user want to specify a new settings doc?
                 Console.Write("\n");
                 Console.WriteLine("Settings load. Specify new settings file? Y/n");
+                string settingsPath = string.Empty;
+                settingsPath = Directory.GetCurrentDirectory() + @"\settings.xml";
                 Console.WriteLine("[DEFAULT: settings.xml]");
                 Console.Write("--> ");
                 string newSettings = Console.ReadLine();
                 Console.Write("\n");
                 if (newSettings == "Y" || newSettings == "y" && newSettings != "-EXIT" && newSettings != "-HELP")
                 {
+                    //SPECIFY A NEW SETTINGS DOC
                     //assume settings doc is valid for now...will update during error checking.
                     validDoc = true;
 
                     Console.WriteLine("Specify new filename. Use full filepath.");
                     Console.Write("--> ");
-                    settingsXDocFName = Console.ReadLine();
+                    string settingsFilename = string.Empty;
+                    settingsFilename = Console.ReadLine();
+                    settingsPath = Directory.GetCurrentDirectory() + settingsFilename;
+                    settingsXDocFName = File.ReadAllText(settingsPath);
                     Console.Write("\n");
                     Console.Write("SETTINGS: ");
                     Console.Write(settingsXDocFName);
@@ -52,7 +60,7 @@ namespace Chisel
                     //load in the document
                     try
                     {
-                        settingsXDoc.Load(settingsXDocFName);
+                        settingsXDoc.Load(settingsPath);
                     }
                     catch
                     {
@@ -84,14 +92,22 @@ namespace Chisel
                 else if (newSettings == "N" || newSettings == "n" && newSettings != "-EXIT" && newSettings != "-HELP")
                 {
                     //default settings doc is valid.
+                    settingsPath = Directory.GetCurrentDirectory() + @"\settings.xml";
+                    settingsXDocFName = "settings.xml";
+                    string settingsXml = string.Empty;
+
                     Console.Write("SETTINGS: ");
-                    Console.Write(settingsXDocFName);
+
+                    Console.Write(settingsPath);
 
                     //put parsing code here
                     //load in the document
                     try
                     {
-                        settingsXDoc.Load(settingsXDocFName);
+                        Serializer ser = new Serializer();
+                        settingsXml = File.ReadAllText(settingsPath);
+                        Settings prefixFromXml = SerializableAttribute.Deserialize<Settings>(settingsXml);
+                        xmlOutputPrefix = SerializableAttribute.Serialize<Settings>(prefixFromXml);
                     }
                     catch
                     {
