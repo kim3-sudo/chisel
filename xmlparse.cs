@@ -19,8 +19,9 @@ namespace Chisel
         string multFileString;
         bool multFile;
         //create a function called settingsParser that reads in the settings document and parses it
-        public void settingsParser()
+        public string[] settingsParser()
         {
+            
             //initialize a new instance of the XmlDocument class
             XmlDocument settingsXDoc = new XmlDocument();
 
@@ -104,10 +105,13 @@ namespace Chisel
                     //load in the document
                     try
                     {
+                        /*
                         Serializer ser = new Serializer();
                         settingsXml = File.ReadAllText(settingsPath);
                         Settings prefixFromXml = SerializableAttribute.Deserialize<Settings>(settingsXml);
                         xmlOutputPrefix = SerializableAttribute.Serialize<Settings>(prefixFromXml);
+                        */
+                        settingsXDoc.Load(settingsPath);
                     }
                     catch
                     {
@@ -153,6 +157,8 @@ namespace Chisel
                     validDoc = false;
                     Console.Write("ERROR 22. INVALID SETTINGS DOCUMENT SET.");
                 }
+                string[] comboname = new string[3];
+                return comboname;
             } 
         }
         public string Prefix()
