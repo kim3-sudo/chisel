@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<Settings>
+  <!-- comments declared as such will not be read. -->
+
+  <prefix>https://</prefix>
+  <suffix>/</suffix>
+  <multfile>false</multfile>
+
+</Settings>
