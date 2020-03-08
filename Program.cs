@@ -8,14 +8,18 @@ namespace Chisel
         static void Main(string[] args)
         {
             bool runtime = true;
-            var t = new helpText();
-            t.intro();
+            var showHelp = new helpText();
+            showHelp.intro();
 
             //this should bring in the prefix and suffix, as well as multfile
-            var u = new xmlparse();
-            u.settingsParser();
-            string prefix = u.Prefix();
-            string suffix = u.Suffix();
+            var readSettings = new xmlparse();
+            string prefix = readSettings.settingsParser()[0];
+            string suffix = readSettings.settingsParser()[1];
+            string multFileText = readSettings.settingsParser()[2];
+
+            bool multFile;
+            var toBool = new convertToBool();
+            multFile = toBool.stringToBool(multFileText);
 
             while (runtime == true)
             {
@@ -30,8 +34,8 @@ namespace Chisel
                     bool isUri = Uri.IsWellFormedUriString(testAddressValid, UriKind.RelativeOrAbsolute);
 
                     //test the connection
-                    var q = new connTest();
-                    int pingResult = q.PingHost(testAddressValid);
+                    var testConn = new connTest();
+                    int pingResult = testConn.PingHost(testAddressValid);
                     if (isUri == true && pingResult == 10)
                     {
                         Console.WriteLine("ATTEMPTING TO EXECUTE SCRAPE ON WEBPAGE.");
@@ -48,48 +52,13 @@ namespace Chisel
                     }
                     else
                     {
-                        // return statuses
-                        // code 10: ping success
-                        // code 11: timeout
-                        // code 12: ping exception
-                        // code 13: no interconnection found
-                        // code 14: failure for unknown reason
-                        // code 15: socket exception
-                        if (pingResult == 11)
-                        {
-                            Console.WriteLine("ERROR 11. PING TIMEOUT.");
-                            Console.WriteLine("\n");
-                        }
-                        else if (pingResult == 12)
-                        {
-                            Console.WriteLine("ERROR 12. PING EXCEPTION THROWN.");
-                            Console.WriteLine("\n");
-                        }
-                        else if (pingResult == 13)
-                        {
-                            Console.WriteLine("ERROR 13. UNABLE TO ESTABLISH INTERNET LINK. CHECK INTERNET CONNECTION.");
-                            Console.WriteLine("\n");
-                        }
-                        else if (pingResult == 14)
-                        {
-                            Console.WriteLine("ERROR 14. PING FAILURE. UNKNOWN REASON.");
-                            Console.WriteLine("\n");
-                        }
-                        else if (pingResult == 15)
-                        {
-                            Console.WriteLine("ERROR 15. SOCKET EXCEPTION THROWN.");
-                            Console.WriteLine("\n");
-                        }
-                        else
-                        {
-                            Console.WriteLine("ERROR 21. INVALID ADDRESS.");
-                            Console.Write("\n");
-                        }
+                        var reportConnError = new connTestError();
+                        reportConnError.pingErrorCode(pingResult);
                     }
                 }
                 else if (address == "-HELP")
                 {
-                    t.help();
+                    showHelp.help();
                 }
                 else if (address == "")
                 {

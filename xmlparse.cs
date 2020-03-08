@@ -93,7 +93,7 @@ namespace Chisel
                 else if (newSettings == "N" || newSettings == "n" && newSettings != "-EXIT" && newSettings != "-HELP")
                 {
                     //default settings doc is valid.
-                    settingsPath = Directory.GetCurrentDirectory() + @"\settings.xml";
+                    settingsPath = Directory.GetCurrentDirectory() + @"\settings\settings.xml";
                     settingsXDocFName = "settings.xml";
                     string settingsXml = string.Empty;
 
@@ -105,12 +105,6 @@ namespace Chisel
                     //load in the document
                     try
                     {
-                        /*
-                        Serializer ser = new Serializer();
-                        settingsXml = File.ReadAllText(settingsPath);
-                        Settings prefixFromXml = SerializableAttribute.Deserialize<Settings>(settingsXml);
-                        xmlOutputPrefix = SerializableAttribute.Serialize<Settings>(prefixFromXml);
-                        */
                         settingsXDoc.Load(settingsPath);
                     }
                     catch
@@ -119,15 +113,41 @@ namespace Chisel
                         validDoc = false;
                     }
 
-                    //store matching tags in new variables by node
-                    XmlNodeList XmlPrefix = settingsXDoc.GetElementsByTagName("prefix");
-                    XmlNodeList XmlSuffix = settingsXDoc.GetElementsByTagName("suffix");
-                    XmlNodeList XmlMultFile = settingsXDoc.GetElementsByTagName("multfile");
+                    try
+                    {
+                        settingsXDoc.Load(settingsPath);
 
-                    //convert XmlNodeList objects to strings
-                    string prefix = XmlPrefix.ToString();
-                    string suffix = XmlSuffix.ToString();
-                    string MultFileString = XmlMultFile.ToString();
+                        //store matching tags in new variables by node
+                        XmlNodeList XmlPrefix = settingsXDoc.GetElementsByTagName("prefix");
+                        XmlNodeList XmlSuffix = settingsXDoc.GetElementsByTagName("suffix");
+                        XmlNodeList XmlMultFile = settingsXDoc.GetElementsByTagName("multfile");
+                    }
+                    catch
+                    {
+                        Console.WriteLine("\nERROR 31. SETTINGS FILE NOT VALID.");
+                        validDoc = false;
+                    }
+
+                    try
+                    {
+                        settingsXDoc.Load(settingsPath);
+
+                        //store matching tags in new variables by node
+                        XmlNodeList XmlPrefix = settingsXDoc.GetElementsByTagName("prefix");
+                        XmlNodeList XmlSuffix = settingsXDoc.GetElementsByTagName("suffix");
+                        XmlNodeList XmlMultFile = settingsXDoc.GetElementsByTagName("multfile");
+
+                        //convert XmlNodeList objects to strings
+                        string prefix = XmlPrefix.ToString();
+                        string suffix = XmlSuffix.ToString();
+                        string MultFileString = XmlMultFile.ToString();
+                    }
+                    catch
+                    {
+                        Console.WriteLine("\nERROR 32. SETTINGS FILE NOT CONVERTABLE.");
+                        validDoc = false;
+                    }
+                    
 
                     //convert multifle XML string to c# bool
                     bool MultFile;
@@ -157,9 +177,12 @@ namespace Chisel
                     validDoc = false;
                     Console.Write("ERROR 22. INVALID SETTINGS DOCUMENT SET.");
                 }
-                string[] comboname = new string[3];
-                return comboname;
-            } 
+            }
+            string[] comboname = new string[3];
+            comboname[0] = prefix;
+            comboname[1] = suffix;
+            comboname[2] = multFileString;
+            return comboname;
         }
         public string Prefix()
         {
