@@ -13,13 +13,14 @@ namespace Chisel
 
             //this should bring in the prefix and suffix, as well as multfile
             var readSettings = new xmlparse();
-            string prefix = readSettings.settingsParser()[0];
-            string suffix = readSettings.settingsParser()[1];
-            string multFileText = readSettings.settingsParser()[2];
+            string[] settingsArray = new string[3];
+            settingsArray = readSettings.settingsParser();
+            string prefix = settingsArray[0];
+            string suffix = settingsArray[1];
+            string multFileText = settingsArray[2];
 
-            bool multFile;
-            var toBool = new convertToBool();
-            multFile = toBool.stringToBool(multFileText);
+            //let user that we're ready for scraping input
+            Console.WriteLine("Ready for scraping input. Type '-HELP' for help.");
 
             while (runtime == true)
             {
@@ -38,15 +39,14 @@ namespace Chisel
                     int pingResult = testConn.PingHost(testAddressValid);
                     if (isUri == true && pingResult == 10)
                     {
-                        Console.WriteLine("ATTEMPTING TO EXECUTE SCRAPE ON WEBPAGE.");
-                        Console.Write("USING: ");
-                        string coachaddress;
-                        coachaddress = String.Concat(prefix, address, suffix);
-                        Console.Write(coachaddress);
+                        string fulladdress = string.Empty;
+                        fulladdress = String.Concat(prefix, address, suffix);
+                        //Console.Write(fulladdress); //this bit's in the scraper.cs file
 
+                        //call the scraper function
+                        var beginScrape = new scraper();
+                        beginScrape.scraperInstance(fulladdress);
 
-
-                        Console.WriteLine("SCRAPE IS WIP.");
                         //KEEP THIS IN so that the next query displays correctly...
                         Console.Write("\n");
                     }

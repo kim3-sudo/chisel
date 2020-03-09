@@ -10,18 +10,16 @@ namespace Chisel
     
     class xmlparse
     {
-        string prefix;
-        string suffix;
+        string prefix = string.Empty;
+        string suffix = string.Empty;
 
         public string MultFileString { get; private set; }
         //public object MultFile { get; private set; }
 
-        string multFileString;
-        bool multFile;
         //create a function called settingsParser that reads in the settings document and parses it
         public string[] settingsParser()
         {
-            
+            string multFileString = string.Empty;
             //initialize a new instance of the XmlDocument class
             XmlDocument settingsXDoc = new XmlDocument();
 
@@ -51,44 +49,69 @@ namespace Chisel
                     Console.Write("--> ");
                     string settingsFilename = string.Empty;
                     settingsFilename = Console.ReadLine();
-                    settingsPath = Directory.GetCurrentDirectory() + settingsFilename;
-                    settingsXDocFName = File.ReadAllText(settingsPath);
+                    settingsPath = Directory.GetCurrentDirectory() + @"\settings\";
+                    settingsXDocFName = string.Concat(settingsPath, settingsFilename);
                     Console.Write("\n");
                     Console.Write("SETTINGS: ");
                     Console.Write(settingsXDocFName);
 
                     //put parsing code here
                     //load in the document
-                    try
+                    try //to load in the document
                     {
-                        settingsXDoc.Load(settingsPath);
+                        //Xml parsing in C# document load
+                        settingsXDoc.Load(settingsXDocFName);
                     }
-                    catch
+                    catch //a non-existant document
                     {
                         Console.WriteLine("\nERROR 30. SETTINGS FILE NOT FOUND.");
                         validDoc = false;
                     }
-
-                    //store matching tags in new variables by node
-                    XmlNodeList XmlPrefix = settingsXDoc.GetElementsByTagName("prefix");
-                    XmlNodeList XmlSuffix = settingsXDoc.GetElementsByTagName("suffix");
-                    XmlNodeList XmlMultFile = settingsXDoc.GetElementsByTagName("multfile");
-
-                    //convert XmlNodeList objects to strings
-                    prefix = XmlPrefix.ToString();
-                    suffix = XmlSuffix.ToString();
-                    MultFileString = XmlMultFile.ToString();
-
-                    //convert multifle XML string to c# bool
-                    bool MultFile;
-                    if (MultFileString == "true")
+                    try //to get information from tag names
                     {
-                        MultFile = true;
+                        //Xml parsing in C# document load
+                        settingsXDoc.Load(settingsXDocFName);
+
+                        //store matching tags in new variables by node
+                        XmlNodeList XmlPrefix = settingsXDoc.GetElementsByTagName("prefix");
+                        XmlNodeList XmlSuffix = settingsXDoc.GetElementsByTagName("suffix");
+                        XmlNodeList XmlMultFile = settingsXDoc.GetElementsByTagName("multfile");
                     }
-                    else if (MultFileString == "false")
+                    catch // a settings load failure
                     {
-                        MultFile = false;
+                        Console.WriteLine("\nERROR 31. SETTINGS LOAD FAILURE.");
+                        validDoc = false;
                     }
+                    try //to shove information into strings
+                    {
+                        //Xml parsing in C# document load
+                        settingsXDoc.Load(settingsXDocFName);
+
+                        //store matching tags in new variables by node
+                        XmlNodeList XmlPrefix = settingsXDoc.GetElementsByTagName("prefix");
+                        XmlNodeList XmlSuffix = settingsXDoc.GetElementsByTagName("suffix");
+                        XmlNodeList XmlMultFile = settingsXDoc.GetElementsByTagName("multfile");
+
+                        //convert XmlNodeList objects to strings
+                        prefix = XmlPrefix.ToString();
+                        suffix = XmlSuffix.ToString();
+                        MultFileString = XmlMultFile.ToString();
+
+                        //error checking complete; XML document should be syntactically correct
+                        validDoc = true;
+                    }
+                    catch // a settings conversion failure into strings
+                    {
+                        Console.WriteLine("\nERROR 32. SETTINGS CONVERSION FAILURE.");
+                        validDoc = false;
+                    }
+                    //convert MultFileString into C# bool
+                    bool multFile;
+                    var toBool = new convertToBool();
+                    multFile = toBool.stringToBool(MultFileString);
+
+                    validDoc = true;
+                    Console.Write("\n");
                 }
                 else if (newSettings == "N" || newSettings == "n" && newSettings != "-EXIT" && newSettings != "-HELP")
                 {
@@ -98,39 +121,39 @@ namespace Chisel
                     string settingsXml = string.Empty;
 
                     Console.Write("SETTINGS: ");
-
                     Console.Write(settingsPath);
 
                     //put parsing code here
                     //load in the document
-                    try
+                    try //to load in the document
                     {
-                        settingsXDoc.Load(settingsPath);
+                        //Xml parsing in C# document load
+                        settingsXDoc.Load(settingsXDocFName);
                     }
-                    catch
+                    catch //a non-existant document
                     {
                         Console.WriteLine("\nERROR 30. SETTINGS FILE NOT FOUND.");
                         validDoc = false;
                     }
-
-                    try
+                    try //to get information from tag names
                     {
-                        settingsXDoc.Load(settingsPath);
+                        //Xml parsing in C# document load
+                        settingsXDoc.Load(settingsXDocFName);
 
                         //store matching tags in new variables by node
                         XmlNodeList XmlPrefix = settingsXDoc.GetElementsByTagName("prefix");
                         XmlNodeList XmlSuffix = settingsXDoc.GetElementsByTagName("suffix");
                         XmlNodeList XmlMultFile = settingsXDoc.GetElementsByTagName("multfile");
                     }
-                    catch
+                    catch // a settings load failure
                     {
-                        Console.WriteLine("\nERROR 31. SETTINGS FILE NOT VALID.");
+                        Console.WriteLine("\nERROR 31. SETTINGS LOAD FAILURE.");
                         validDoc = false;
                     }
-
-                    try
+                    try //to shove information into strings
                     {
-                        settingsXDoc.Load(settingsPath);
+                        //Xml parsing in C# document load
+                        settingsXDoc.Load(settingsXDocFName);
 
                         //store matching tags in new variables by node
                         XmlNodeList XmlPrefix = settingsXDoc.GetElementsByTagName("prefix");
@@ -138,27 +161,25 @@ namespace Chisel
                         XmlNodeList XmlMultFile = settingsXDoc.GetElementsByTagName("multfile");
 
                         //convert XmlNodeList objects to strings
-                        string prefix = XmlPrefix.ToString();
-                        string suffix = XmlSuffix.ToString();
-                        string MultFileString = XmlMultFile.ToString();
+                        prefix = XmlPrefix.ToString();
+                        suffix = XmlSuffix.ToString();
+                        MultFileString = XmlMultFile.ToString();
+
+                        //error checking complete; XML document should be syntactically correct
+                        validDoc = true;
                     }
-                    catch
+                    catch // a settings conversion failure into strings
                     {
-                        Console.WriteLine("\nERROR 32. SETTINGS FILE NOT CONVERTABLE.");
+                        Console.WriteLine("\nERROR 32. SETTINGS CONVERSION FAILURE.");
                         validDoc = false;
                     }
-                    
+                    //convert MultFileString into C# bool
+                    bool multFile;
+                    var toBool = new convertToBool();
+                    multFile = toBool.stringToBool(MultFileString);
 
-                    //convert multifle XML string to c# bool
-                    bool MultFile;
-                    if (MultFileString == "true")
-                    {
-                        MultFile = true;
-                    }
-                    else if (MultFileString == "false")
-                    {
-                        MultFile = false;
-                    }
+                    validDoc = true;
+                    Console.Write("\n");
                 }
                 else if (newSettings == "-HELP")
                 {
@@ -183,18 +204,6 @@ namespace Chisel
             comboname[1] = suffix;
             comboname[2] = multFileString;
             return comboname;
-        }
-        public string Prefix()
-        {
-            return prefix;
-        }
-        public string Suffix()
-        {
-            return suffix;
-        }
-        public bool MultFile()
-        {
-            return multFile;
         }
     }
 }
