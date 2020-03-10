@@ -13,11 +13,12 @@ namespace Chisel
 
             //this should bring in the prefix and suffix, as well as multfile
             var readSettings = new xmlparse();
-            string[] settingsArray = new string[3];
+            string[] settingsArray = new string[4];
             settingsArray = readSettings.settingsParser();
             string prefix = settingsArray[0];
             string suffix = settingsArray[1];
             string multFileText = settingsArray[2];
+            string scrapeClass = settingsArray[3];
 
             //let user that we're ready for scraping input
             Console.WriteLine("Ready for scraping input. Type '-HELP' for help.");
@@ -45,7 +46,7 @@ namespace Chisel
 
                         //call the scraper function
                         var beginScrape = new scraper();
-                        beginScrape.scraperInstance(fulladdress);
+                        beginScrape.scraperInstance(fulladdress, scrapeClass);
 
                         //KEEP THIS IN so that the next query displays correctly...
                         Console.Write("\n");

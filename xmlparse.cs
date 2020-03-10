@@ -12,6 +12,7 @@ namespace Chisel
     {
         string prefix = string.Empty;
         string suffix = string.Empty;
+        string scrapeClass = string.Empty;
 
         public string MultFileString { get; private set; }
         //public object MultFile { get; private set; }
@@ -76,6 +77,7 @@ namespace Chisel
                         XmlNodeList XmlPrefix = settingsXDoc.GetElementsByTagName("prefix");
                         XmlNodeList XmlSuffix = settingsXDoc.GetElementsByTagName("suffix");
                         XmlNodeList XmlMultFile = settingsXDoc.GetElementsByTagName("multfile");
+                        XmlNodeList XmlScrapeClass = settingsXDoc.GetElementsByTagName("scrapeClass");
                     }
                     catch // a settings load failure
                     {
@@ -91,11 +93,13 @@ namespace Chisel
                         XmlNodeList XmlPrefix = settingsXDoc.GetElementsByTagName("prefix");
                         XmlNodeList XmlSuffix = settingsXDoc.GetElementsByTagName("suffix");
                         XmlNodeList XmlMultFile = settingsXDoc.GetElementsByTagName("multfile");
+                        XmlNodeList XmlScrapeClass = settingsXDoc.GetElementsByTagName("scrapeClass");
 
                         //convert XmlNodeList objects to strings
                         prefix = XmlPrefix.ToString();
                         suffix = XmlSuffix.ToString();
                         MultFileString = XmlMultFile.ToString();
+                        scrapeClass = XmlScrapeClass.ToString();
 
                         //error checking complete; XML document should be syntactically correct
                         validDoc = true;
@@ -144,6 +148,7 @@ namespace Chisel
                         XmlNodeList XmlPrefix = settingsXDoc.GetElementsByTagName("prefix");
                         XmlNodeList XmlSuffix = settingsXDoc.GetElementsByTagName("suffix");
                         XmlNodeList XmlMultFile = settingsXDoc.GetElementsByTagName("multfile");
+                        XmlNodeList XmlScrapeClass = settingsXDoc.GetElementsByTagName("scrapeClass");
                     }
                     catch // a settings load failure
                     {
@@ -159,11 +164,13 @@ namespace Chisel
                         XmlNodeList XmlPrefix = settingsXDoc.GetElementsByTagName("prefix");
                         XmlNodeList XmlSuffix = settingsXDoc.GetElementsByTagName("suffix");
                         XmlNodeList XmlMultFile = settingsXDoc.GetElementsByTagName("multfile");
+                        XmlNodeList XmlScrapeClass = settingsXDoc.GetElementsByTagName("scrapeClass");
 
                         //convert XmlNodeList objects to strings
                         prefix = XmlPrefix.ToString();
                         suffix = XmlSuffix.ToString();
                         MultFileString = XmlMultFile.ToString();
+                        scrapeClass = XmlScrapeClass.ToString();
 
                         //error checking complete; XML document should be syntactically correct
                         validDoc = true;
@@ -199,10 +206,11 @@ namespace Chisel
                     Console.Write("ERROR 22. INVALID SETTINGS DOCUMENT SET.");
                 }
             }
-            string[] comboname = new string[3];
+            string[] comboname = new string[4];
             comboname[0] = prefix;
             comboname[1] = suffix;
             comboname[2] = multFileString;
+            comboname[3] = scrapeClass;
             return comboname;
         }
     }

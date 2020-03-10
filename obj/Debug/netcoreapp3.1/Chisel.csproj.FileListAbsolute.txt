@@ -20,3 +20,6 @@ C:\Users\skim2\Documents\chisel\obj\Debug\netcoreapp3.1\Chisel.AssemblyInfoInput
 C:\Users\skim2\Documents\chisel\obj\Debug\netcoreapp3.1\Chisel.AssemblyInfo.cs
 C:\Users\skim2\Documents\chisel\obj\Debug\netcoreapp3.1\Chisel.dll
 C:\Users\skim2\Documents\chisel\obj\Debug\netcoreapp3.1\Chisel.pdb
+C:\Users\skim2\Documents\chisel\bin\Debug\netcoreapp3.1\HtmlAgilityPack.dll
+C:\Users\skim2\Documents\chisel\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
+C:\Users\skim2\Documents\chisel\obj\Debug\netcoreapp3.1\Chisel.csproj.CopyComplete

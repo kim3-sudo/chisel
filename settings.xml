@@ -6,5 +6,6 @@
   <prefix>https://</prefix>
   <suffix>/</suffix>
   <multfile>false</multfile>
+  <scrapeClass>//a[@class='sidearm-coaches-coach'</scrapeClass>
 
 </Settings>
